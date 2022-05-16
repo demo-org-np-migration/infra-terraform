@@ -1,0 +1,312 @@
+{
+  "realm": "cauri-staging",
+  "enabled": true,
+  "sslRequired": "none",
+  "accessTokenLifespan": 1800,
+  "registrationAllowed": false,
+  "roles": {
+    "realm": [
+      {
+        "name": "customer",
+        "description": "Cliente final de la app móvil"
+      },
+      {
+        "name": "merchant",
+        "description": "Comercio con acceso al portal"
+      },
+      {
+        "name": "ops",
+        "description": "Operaciones, solo lectura en backoffice"
+      },
+      {
+        "name": "ops-admin",
+        "description": "Operaciones con permisos de escritura (freeze, etc)"
+      },
+      {
+        "name": "service",
+        "description": "Rol de service account para llamadas entre servicios"
+      }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "mobile-app",
+      "enabled": true,
+      "publicClient": true,
+      "protocol": "openid-connect",
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": true,
+      "serviceAccountsEnabled": false,
+      "redirectUris": [
+        "*"
+      ],
+      "webOrigins": [
+        "*"
+      ]
+    },
+    {
+      "clientId": "merchant-portal",
+      "enabled": true,
+      "publicClient": true,
+      "protocol": "openid-connect",
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": true,
+      "serviceAccountsEnabled": false,
+      "redirectUris": [
+        "*"
+      ],
+      "webOrigins": [
+        "*"
+      ],
+      "protocolMappers": [
+        {
+          "name": "merchant_id",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-attribute-mapper",
+          "consentRequired": false,
+          "config": {
+            "userinfo.token.claim": "true",
+            "user.attribute": "merchant_id",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "merchant_id",
+            "jsonType.label": "String"
+          }
+        }
+      ]
+    },
+    {
+      "clientId": "backoffice-ui",
+      "enabled": true,
+      "publicClient": true,
+      "protocol": "openid-connect",
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": true,
+      "serviceAccountsEnabled": false,
+      "redirectUris": [
+        "*"
+      ],
+      "webOrigins": [
+        "*"
+      ]
+    },
+    {
+      "clientId": "mobile-bff",
+      "enabled": true,
+      "publicClient": false,
+      "protocol": "openid-connect",
+      "standardFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": true,
+      "secret": "mobile-bff-secret-staging",
+      "redirectUris": [],
+      "webOrigins": []
+    },
+    {
+      "clientId": "merchant-portal-bff",
+      "enabled": true,
+      "publicClient": false,
+      "protocol": "openid-connect",
+      "standardFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": true,
+      "secret": "merchant-portal-bff-secret-staging",
+      "redirectUris": [],
+      "webOrigins": []
+    },
+    {
+      "clientId": "backoffice-api",
+      "enabled": true,
+      "publicClient": false,
+      "protocol": "openid-connect",
+      "standardFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": true,
+      "secret": "backoffice-api-secret-staging",
+      "redirectUris": [],
+      "webOrigins": []
+    },
+    {
+      "clientId": "payments-api",
+      "enabled": true,
+      "publicClient": false,
+      "protocol": "openid-connect",
+      "standardFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": true,
+      "secret": "payments-api-secret-staging",
+      "redirectUris": [],
+      "webOrigins": []
+    },
+    {
+      "clientId": "cards-api",
+      "enabled": true,
+      "publicClient": false,
+      "protocol": "openid-connect",
+      "standardFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": true,
+      "secret": "cards-api-secret-staging",
+      "redirectUris": [],
+      "webOrigins": []
+    },
+    {
+      "clientId": "kyc-service",
+      "enabled": true,
+      "publicClient": false,
+      "protocol": "openid-connect",
+      "standardFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": true,
+      "secret": "kyc-service-secret-staging",
+      "redirectUris": [],
+      "webOrigins": []
+    },
+    {
+      "clientId": "payments-worker",
+      "enabled": true,
+      "publicClient": false,
+      "protocol": "openid-connect",
+      "standardFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": true,
+      "secret": "payments-worker-secret-staging",
+      "redirectUris": [],
+      "webOrigins": []
+    },
+    {
+      "clientId": "notifications",
+      "enabled": true,
+      "publicClient": false,
+      "protocol": "openid-connect",
+      "standardFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": true,
+      "secret": "notifications-secret-staging",
+      "redirectUris": [],
+      "webOrigins": []
+    }
+  ],
+  "users": [
+    {
+      "id": "aaaaaaaa-0000-4000-8000-000000000001",
+      "username": "ana.cliente",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "ana.cliente@cauri.io",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "cauri123",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "customer"
+      ]
+    },
+    {
+      "id": "bbbbbbbb-0000-4000-8000-000000000002",
+      "username": "bruno.comercio",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "bruno.comercio@cauri.io",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "cauri123",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "merchant"
+      ],
+      "attributes": {
+        "merchant_id": [
+          "11111111-1111-1111-1111-111111111111"
+        ]
+      }
+    },
+    {
+      "id": "cccccccc-0000-4000-8000-000000000003",
+      "username": "carla.ops",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "carla.ops@cauri.io",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "cauri123",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "ops-admin"
+      ]
+    },
+    {
+      "username": "service-account-mobile-bff",
+      "enabled": true,
+      "serviceAccountClientId": "mobile-bff",
+      "realmRoles": [
+        "service"
+      ]
+    },
+    {
+      "username": "service-account-merchant-portal-bff",
+      "enabled": true,
+      "serviceAccountClientId": "merchant-portal-bff",
+      "realmRoles": [
+        "service"
+      ]
+    },
+    {
+      "username": "service-account-backoffice-api",
+      "enabled": true,
+      "serviceAccountClientId": "backoffice-api",
+      "realmRoles": [
+        "service"
+      ]
+    },
+    {
+      "username": "service-account-payments-api",
+      "enabled": true,
+      "serviceAccountClientId": "payments-api",
+      "realmRoles": [
+        "service"
+      ]
+    },
+    {
+      "username": "service-account-cards-api",
+      "enabled": true,
+      "serviceAccountClientId": "cards-api",
+      "realmRoles": [
+        "service"
+      ]
+    },
+    {
+      "username": "service-account-kyc-service",
+      "enabled": true,
+      "serviceAccountClientId": "kyc-service",
+      "realmRoles": [
+        "service"
+      ]
+    },
+    {
+      "username": "service-account-payments-worker",
+      "enabled": true,
+      "serviceAccountClientId": "payments-worker",
+      "realmRoles": [
+        "service"
+      ]
+    },
+    {
+      "username": "service-account-notifications",
+      "enabled": true,
+      "serviceAccountClientId": "notifications",
+      "realmRoles": [
+        "service"
+      ]
+    }
+  ]
+}
