@@ -1,0 +1,204 @@
+_format_version: "3.0"
+
+services:
+  # ---- staging (api.staging.cauri.local) ----
+  - name: accounts-api-staging
+    url: http://accounts-api.staging.svc.cluster.local:8080
+    routes:
+      - name: accounts-api-staging-route
+        hosts:
+          - api.staging.cauri.local
+        paths:
+          - "/v1/accounts"
+  - name: ledger-core-staging
+    url: http://ledger-core.staging.svc.cluster.local:8080
+    routes:
+      - name: ledger-core-staging-route
+        hosts:
+          - api.staging.cauri.local
+        paths:
+          - "/v1/customers"
+  - name: payments-api-staging
+    url: http://payments-api.staging.svc.cluster.local:8080
+    routes:
+      - name: payments-api-staging-route
+        hosts:
+          - api.staging.cauri.local
+        paths:
+          - "/v1/payments"
+          - "/v1/merchants"
+  - name: cards-api-staging
+    url: http://cards-api.staging.svc.cluster.local:8080
+    routes:
+      - name: cards-api-staging-route
+        hosts:
+          - api.staging.cauri.local
+        paths:
+          - "/v1/cards"
+          - "/v1/authorizations"
+  - name: kyc-service-staging
+    url: http://kyc-service.staging.svc.cluster.local:8080
+    routes:
+      - name: kyc-service-staging-route
+        hosts:
+          - api.staging.cauri.local
+        paths:
+          - "/v1/kyc"
+  - name: notifications-staging
+    url: http://notifications.staging.svc.cluster.local:8080
+    routes:
+      - name: notifications-staging-route
+        hosts:
+          - api.staging.cauri.local
+        paths:
+          - "/v1/preferences"
+  # loyalty: dado de baja 2026-03? confirmar con channels
+  - name: loyalty-service-staging
+    url: http://loyalty-service.staging.svc.cluster.local:8080
+    routes:
+      - name: loyalty-service-staging-route
+        hosts:
+          - api.staging.cauri.local
+        paths:
+          - "/v1/loyalty"
+  - name: mobile-bff-staging
+    url: http://mobile-bff.staging.svc.cluster.local:8080
+    routes:
+      - name: mobile-bff-staging-route
+        hosts:
+          - api.staging.cauri.local
+        paths:
+          - "/mobile"
+  - name: merchant-portal-bff-staging
+    url: http://merchant-portal-bff.staging.svc.cluster.local:8080
+    routes:
+      - name: merchant-portal-bff-staging-route
+        hosts:
+          - api.staging.cauri.local
+        paths:
+          - "/merchant"
+  - name: backoffice-api-staging
+    url: http://backoffice-api.staging.svc.cluster.local:8080
+    routes:
+      - name: backoffice-api-staging-route
+        hosts:
+          - api.staging.cauri.local
+        paths:
+          - "/backoffice"
+  - name: backoffice-ui-staging
+    url: http://backoffice-ui.staging.svc.cluster.local:8080
+    routes:
+      - name: backoffice-ui-staging-route
+        hosts:
+          - api.staging.cauri.local
+        paths:
+          - "/ops"
+  - name: web-app-staging
+    url: http://web-app.staging.svc.cluster.local:8080
+    routes:
+      - name: web-app-staging-route
+        hosts:
+          - api.staging.cauri.local
+        paths:
+          - "/"
+
+  # ---- prod (api.cauri.local) ----
+  - name: accounts-api-prod
+    url: http://accounts-api.prod.svc.cluster.local:8080
+    routes:
+      - name: accounts-api-prod-route
+        hosts:
+          - api.cauri.local
+        paths:
+          - "/v1/accounts"
+  - name: ledger-core-prod
+    url: http://ledger-core.prod.svc.cluster.local:8080
+    routes:
+      - name: ledger-core-prod-route
+        hosts:
+          - api.cauri.local
+        paths:
+          - "/v1/customers"
+  - name: payments-api-prod
+    url: http://payments-api.prod.svc.cluster.local:8080
+    routes:
+      - name: payments-api-prod-route
+        hosts:
+          - api.cauri.local
+        paths:
+          - "/v1/payments"
+          - "/v1/merchants"
+  - name: cards-api-prod
+    url: http://cards-api.prod.svc.cluster.local:8080
+    routes:
+      - name: cards-api-prod-route
+        hosts:
+          - api.cauri.local
+        paths:
+          - "/v1/cards"
+          - "/v1/authorizations"
+  - name: kyc-service-prod
+    url: http://kyc-service.prod.svc.cluster.local:8080
+    routes:
+      - name: kyc-service-prod-route
+        hosts:
+          - api.cauri.local
+        paths:
+          - "/v1/kyc"
+  - name: notifications-prod
+    url: http://notifications.prod.svc.cluster.local:8080
+    routes:
+      - name: notifications-prod-route
+        hosts:
+          - api.cauri.local
+        paths:
+          - "/v1/preferences"
+  # loyalty: dado de baja 2026-03? confirmar con channels
+  - name: loyalty-service-prod
+    url: http://loyalty-service.prod.svc.cluster.local:8080
+    routes:
+      - name: loyalty-service-prod-route
+        hosts:
+          - api.cauri.local
+        paths:
+          - "/v1/loyalty"
+  - name: mobile-bff-prod
+    url: http://mobile-bff.prod.svc.cluster.local:8080
+    routes:
+      - name: mobile-bff-prod-route
+        hosts:
+          - api.cauri.local
+        paths:
+          - "/mobile"
+  - name: merchant-portal-bff-prod
+    url: http://merchant-portal-bff.prod.svc.cluster.local:8080
+    routes:
+      - name: merchant-portal-bff-prod-route
+        hosts:
+          - api.cauri.local
+        paths:
+          - "/merchant"
+  - name: backoffice-api-prod
+    url: http://backoffice-api.prod.svc.cluster.local:8080
+    routes:
+      - name: backoffice-api-prod-route
+        hosts:
+          - api.cauri.local
+        paths:
+          - "/backoffice"
+  - name: backoffice-ui-prod
+    url: http://backoffice-ui.prod.svc.cluster.local:8080
+    routes:
+      - name: backoffice-ui-prod-route
+        hosts:
+          - api.cauri.local
+        paths:
+          - "/ops"
+  - name: web-app-prod
+    url: http://web-app.prod.svc.cluster.local:8080
+    routes:
+      - name: web-app-prod-route
+        hosts:
+          - api.cauri.local
+        paths:
+          - "/"
