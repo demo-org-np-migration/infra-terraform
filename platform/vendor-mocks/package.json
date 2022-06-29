@@ -1,0 +1,13 @@
+{
+  "name": "vendor-mock",
+  "version": "1.0.0",
+  "description": "Mock genérico de los vendors externos de Cauri (Cardnet, Sentinel, Veridoc, OpenFX, Mailgunner, Pushly). Sin dependencias, solo http nativo.",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
