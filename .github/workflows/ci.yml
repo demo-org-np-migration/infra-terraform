@@ -1,0 +1,48 @@
+name: ci
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  fmt-and-validate:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        root: [platform, envs/staging, envs/prod]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.9.8"
+
+      - name: terraform fmt -check
+        working-directory: ${{ matrix.root }}
+        run: terraform fmt -check -diff
+
+      - name: terraform init (sin backend)
+        working-directory: ${{ matrix.root }}
+        run: terraform init -backend=false -input=false
+
+      - name: terraform validate
+        working-directory: ${{ matrix.root }}
+        run: terraform validate
+
+  vendor-mocks-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: docker build vendor-mocks
+        working-directory: platform/vendor-mocks
+        run: docker build -t vendor-mock:ci .
+
+  gh-runner-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: docker build gh-runner
+        working-directory: platform/gh-runner
+        run: docker build -t gh-runner:ci .
