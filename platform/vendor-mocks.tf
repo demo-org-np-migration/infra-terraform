@@ -59,6 +59,24 @@ resource "kubernetes_deployment" "vendor_mock" {
             name  = "PORT"
             value = "8080"
           }
+
+          readiness_probe {
+            http_get {
+              path = "/health"
+              port = 8080
+            }
+            initial_delay_seconds = 2
+            period_seconds        = 5
+          }
+
+          liveness_probe {
+            http_get {
+              path = "/health"
+              port = 8080
+            }
+            initial_delay_seconds = 5
+            period_seconds        = 10
+          }
         }
       }
     }
