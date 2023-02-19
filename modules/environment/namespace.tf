@@ -1,8 +1,6 @@
 resource "kubernetes_namespace" "this" {
   metadata {
-    name = var.env
-    labels = {
-      "cauri.io/env" = var.env
-    }
+    name   = var.env
+    labels = local.common_labels
   }
 }
