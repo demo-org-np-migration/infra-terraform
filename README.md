@@ -110,3 +110,7 @@ contra algo que no sea la laptop, se pisan con `-backend-config` en el init.
 - Los vendor mocks responden todos igual salvo por `VENDOR`/`MODE`; si un
   mock no contesta la ruta que esperás, es porque esa ruta no está en
   `platform/vendor-mocks/server.js` todavía, no un bug de red.
+- Para probar un mock sin pasar por k8s: `cd platform/vendor-mocks && VENDOR=sentinel
+  MODE=live PORT=8080 node server.js`, y en otra terminal `curl -X POST
+  localhost:8080/v2/assess -d '{"amount":"150000"}'` -- debería devolver
+  `risk: 0.9`.
