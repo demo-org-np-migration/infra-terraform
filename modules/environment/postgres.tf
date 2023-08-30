@@ -10,16 +10,7 @@ resource "kubernetes_config_map" "postgres_initdb" {
   }
 
   data = {
-    "01-create-databases.sh" = <<-EOT
-      #!/bin/bash
-      set -e
-      for db in ledger payments cards rates warehouse notifications; do
-        psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" <<-EOSQL
-          SELECT 'CREATE DATABASE $db'
-          WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = '$db')\gexec
-      EOSQL
-      done
-    EOT
+    "01-create-databases.sql" = file("${path.module}/initdb/create-databases.sql")
   }
 }
 
@@ -55,7 +46,7 @@ resource "kubernetes_deployment" "postgres" {
   metadata {
     name      = "postgres"
     namespace = kubernetes_namespace.this.metadata[0].name
-    labels    = local.common_labels
+    labels    = merge(local.common_labels, { "app.kubernetes.io/name" = "postgres" })
   }
 
   spec {
@@ -126,8 +117,7 @@ resource "kubernetes_deployment" "postgres" {
         volume {
           name = "initdb"
           config_map {
-            name         = kubernetes_config_map.postgres_initdb.metadata[0].name
-            default_mode = "0755"
+            name = kubernetes_config_map.postgres_initdb.metadata[0].name
           }
         }
       }
@@ -139,7 +129,7 @@ resource "kubernetes_service" "postgres" {
   metadata {
     name      = "postgres"
     namespace = kubernetes_namespace.this.metadata[0].name
-    labels    = local.common_labels
+    labels    = merge(local.common_labels, { "app.kubernetes.io/name" = "postgres" })
   }
 
   spec {
