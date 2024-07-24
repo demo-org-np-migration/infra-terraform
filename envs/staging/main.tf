@@ -9,6 +9,5 @@ module "environment" {
   sqs_queue_prefix   = "staging-"
   s3_bucket_prefix   = "cauri-staging-"
 
-  aws_endpoint = var.aws_endpoint
-  aws_region   = "us-east-1"
+  aws_region = "us-east-1"
 }

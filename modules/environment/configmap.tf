@@ -7,7 +7,7 @@ resource "kubernetes_config_map" "platform_endpoints" {
   data = {
     KEYCLOAK_ISSUER    = var.keycloak_issuer
     KAFKA_BOOTSTRAP    = var.kafka_bootstrap
-    AWS_ENDPOINT_URL   = var.aws_endpoint
+    AWS_ENDPOINT_URL   = var.aws_endpoint_in_cluster
     AWS_REGION         = var.aws_region
     KAFKA_TOPIC_PREFIX = var.kafka_topic_prefix
     SQS_QUEUE_PREFIX   = var.sqs_queue_prefix

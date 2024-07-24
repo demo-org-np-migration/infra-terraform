@@ -19,9 +19,10 @@ variable "kafka_topic_prefix" {
   type        = string
 }
 
-variable "aws_endpoint" {
-  description = "Endpoint de LocalStack, mismo valor que platform."
+variable "aws_endpoint_in_cluster" {
+  description = "Endpoint de LocalStack tal como lo resuelven los pods (las convenciones internas de API: http://localstack.platform.svc:4566). Va al ConfigMap platform-endpoints, nunca var.aws_endpoint -- ese es el de la laptop y rompía a todo el que leyera AWS_ENDPOINT_URL desde dentro del cluster."
   type        = string
+  default     = "http://localstack.platform.svc:4566"
 }
 
 variable "aws_region" {
