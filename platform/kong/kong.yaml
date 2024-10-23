@@ -10,6 +10,7 @@ services:
           - api.staging.cauri.local
         paths:
           - "/v1/accounts"
+        strip_path: false
   - name: ledger-core-staging
     url: http://ledger-core.staging.svc.cluster.local:8080
     routes:
@@ -18,6 +19,7 @@ services:
           - api.staging.cauri.local
         paths:
           - "/v1/customers"
+        strip_path: false
   - name: payments-api-staging
     url: http://payments-api.staging.svc.cluster.local:8080
     routes:
@@ -27,6 +29,7 @@ services:
         paths:
           - "/v1/payments"
           - "/v1/merchants"
+        strip_path: false
   - name: cards-api-staging
     url: http://cards-api.staging.svc.cluster.local:8080
     routes:
@@ -36,6 +39,7 @@ services:
         paths:
           - "/v1/cards"
           - "/v1/authorizations"
+        strip_path: false
   - name: kyc-service-staging
     url: http://kyc-service.staging.svc.cluster.local:8080
     routes:
@@ -44,6 +48,7 @@ services:
           - api.staging.cauri.local
         paths:
           - "/v1/kyc"
+        strip_path: false
   - name: notifications-staging
     url: http://notifications.staging.svc.cluster.local:8080
     routes:
@@ -52,6 +57,7 @@ services:
           - api.staging.cauri.local
         paths:
           - "/v1/preferences"
+        strip_path: false
   # loyalty: dado de baja 2026-03? confirmar con channels
   - name: loyalty-service-staging
     url: http://loyalty-service.staging.svc.cluster.local:8080
@@ -61,6 +67,7 @@ services:
           - api.staging.cauri.local
         paths:
           - "/v1/loyalty"
+        strip_path: false
   - name: mobile-bff-staging
     url: http://mobile-bff.staging.svc.cluster.local:8080
     routes:
@@ -69,6 +76,7 @@ services:
           - api.staging.cauri.local
         paths:
           - "/mobile"
+        strip_path: false
   - name: merchant-portal-bff-staging
     url: http://merchant-portal-bff.staging.svc.cluster.local:8080
     routes:
@@ -77,6 +85,7 @@ services:
           - api.staging.cauri.local
         paths:
           - "/merchant"
+        strip_path: false
   - name: backoffice-api-staging
     url: http://backoffice-api.staging.svc.cluster.local:8080
     routes:
@@ -85,6 +94,7 @@ services:
           - api.staging.cauri.local
         paths:
           - "/backoffice"
+        strip_path: false
   - name: backoffice-ui-staging
     url: http://backoffice-ui.staging.svc.cluster.local:8080
     routes:
@@ -93,6 +103,7 @@ services:
           - api.staging.cauri.local
         paths:
           - "/ops"
+        strip_path: false
   - name: web-app-staging
     url: http://web-app.staging.svc.cluster.local:8080
     routes:
@@ -101,6 +112,7 @@ services:
           - api.staging.cauri.local
         paths:
           - "/"
+        strip_path: false
 
   # ---- prod (api.cauri.local) ----
   - name: accounts-api-prod
@@ -111,6 +123,7 @@ services:
           - api.cauri.local
         paths:
           - "/v1/accounts"
+        strip_path: false
   - name: ledger-core-prod
     url: http://ledger-core.prod.svc.cluster.local:8080
     routes:
@@ -119,6 +132,7 @@ services:
           - api.cauri.local
         paths:
           - "/v1/customers"
+        strip_path: false
   - name: payments-api-prod
     url: http://payments-api.prod.svc.cluster.local:8080
     routes:
@@ -128,6 +142,7 @@ services:
         paths:
           - "/v1/payments"
           - "/v1/merchants"
+        strip_path: false
   - name: cards-api-prod
     url: http://cards-api.prod.svc.cluster.local:8080
     routes:
@@ -137,6 +152,7 @@ services:
         paths:
           - "/v1/cards"
           - "/v1/authorizations"
+        strip_path: false
   - name: kyc-service-prod
     url: http://kyc-service.prod.svc.cluster.local:8080
     routes:
@@ -145,6 +161,7 @@ services:
           - api.cauri.local
         paths:
           - "/v1/kyc"
+        strip_path: false
   - name: notifications-prod
     url: http://notifications.prod.svc.cluster.local:8080
     routes:
@@ -153,6 +170,7 @@ services:
           - api.cauri.local
         paths:
           - "/v1/preferences"
+        strip_path: false
   # loyalty: dado de baja 2026-03? confirmar con channels
   - name: loyalty-service-prod
     url: http://loyalty-service.prod.svc.cluster.local:8080
@@ -162,6 +180,7 @@ services:
           - api.cauri.local
         paths:
           - "/v1/loyalty"
+        strip_path: false
   - name: mobile-bff-prod
     url: http://mobile-bff.prod.svc.cluster.local:8080
     routes:
@@ -170,6 +189,7 @@ services:
           - api.cauri.local
         paths:
           - "/mobile"
+        strip_path: false
   - name: merchant-portal-bff-prod
     url: http://merchant-portal-bff.prod.svc.cluster.local:8080
     routes:
@@ -178,6 +198,7 @@ services:
           - api.cauri.local
         paths:
           - "/merchant"
+        strip_path: false
   - name: backoffice-api-prod
     url: http://backoffice-api.prod.svc.cluster.local:8080
     routes:
@@ -186,6 +207,7 @@ services:
           - api.cauri.local
         paths:
           - "/backoffice"
+        strip_path: false
   - name: backoffice-ui-prod
     url: http://backoffice-ui.prod.svc.cluster.local:8080
     routes:
@@ -194,6 +216,7 @@ services:
           - api.cauri.local
         paths:
           - "/ops"
+        strip_path: false
   - name: web-app-prod
     url: http://web-app.prod.svc.cluster.local:8080
     routes:
@@ -202,3 +225,4 @@ services:
           - api.cauri.local
         paths:
           - "/"
+        strip_path: false
