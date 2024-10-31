@@ -2,7 +2,7 @@ resource "kubernetes_deployment" "redis" {
   metadata {
     name      = "redis"
     namespace = kubernetes_namespace.this.metadata[0].name
-    labels    = local.common_labels
+    labels    = merge(local.common_labels, { "app.kubernetes.io/name" = "redis" })
   }
 
   spec {
@@ -36,7 +36,7 @@ resource "kubernetes_service" "redis" {
   metadata {
     name      = "redis"
     namespace = kubernetes_namespace.this.metadata[0].name
-    labels    = local.common_labels
+    labels    = merge(local.common_labels, { "app.kubernetes.io/name" = "redis" })
   }
 
   spec {
