@@ -189,7 +189,7 @@
   ],
   "users": [
     {
-      "id": "aaaaaaaa-0000-4000-8000-000000000001",
+      "id": "aaaaaaaa-0000-4000-8000-000000000011",
       "username": "ana.cliente",
       "enabled": true,
       "emailVerified": true,
@@ -206,7 +206,7 @@
       ]
     },
     {
-      "id": "bbbbbbbb-0000-4000-8000-000000000002",
+      "id": "bbbbbbbb-0000-4000-8000-000000000012",
       "username": "bruno.comercio",
       "enabled": true,
       "emailVerified": true,
@@ -228,7 +228,7 @@
       }
     },
     {
-      "id": "cccccccc-0000-4000-8000-000000000003",
+      "id": "cccccccc-0000-4000-8000-000000000013",
       "username": "carla.ops",
       "enabled": true,
       "emailVerified": true,
