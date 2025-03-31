@@ -32,6 +32,12 @@ resource "kubernetes_persistent_volume_claim" "postgres" {
     namespace = kubernetes_namespace.this.metadata[0].name
   }
 
+  # local-path (la StorageClass default de k3s) es WaitForFirstConsumer: no
+  # bindea hasta que el pod que la reclama arranca. El provider por default
+  # espera a que el PVC esté Bound antes de seguir, y con esta StorageClass
+  # eso nunca pasa sin un pod -> deadlock de 5 minutos y apply que falla.
+  wait_until_bound = false
+
   spec {
     access_modes = ["ReadWriteOnce"]
     resources {
