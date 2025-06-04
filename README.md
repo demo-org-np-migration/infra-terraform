@@ -87,7 +87,13 @@ contra algo que no sea la laptop, se pisan con `-backend-config` en el init.
 
 - **Keycloak en modo dev** (`start-dev`). Sirve para levantar rápido con
   realms importados, pero no es apto para producción real: sin clustering,
-  sin cache distribuida, hostname strict apagado.
+  sin cache distribuida, hostname strict apagado. Ojo con `KC_HOSTNAME`:
+  Keycloak 25 usa hostname v2, así que le pasamos la URL completa
+  (`http://keycloak.platform.svc:8080`) en vez de solo el host -- con v2,
+  `KC_HOSTNAME_PORT` y `KC_HOSTNAME_STRICT_HTTPS` ni existen (son de v1) y si
+  le dejás solo el host, el issuer arrastra el puerto por el que entró el
+  request (te queda `:8180` pidiendo desde la laptop, y los servicios
+  rechazan esos tokens porque no matchea `KEYCLOAK_ISSUER`).
 - **Kafka single node** (KRaft, un solo broker). Si se cae, se cae para
   staging y para prod a la vez porque comparten broker. Lo sabemos, no es
   el momento de meter 3 nodos para un cluster de laptop.

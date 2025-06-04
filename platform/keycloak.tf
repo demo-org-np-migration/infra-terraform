@@ -48,13 +48,15 @@ resource "kubernetes_deployment" "keycloak" {
             container_port = 8080
           }
 
+          # Keycloak 25 usa hostname v2: KC_HOSTNAME_PORT y KC_HOSTNAME_STRICT_HTTPS
+          # solo existen bajo el feature hostname:v1 (deprecado). Con v2, si le pasás
+          # una URL completa a KC_HOSTNAME el issuer queda fijo a esa URL sin importar
+          # el puerto/host por el que entró el request -- si le dejás solo el host
+          # (como antes), el issuer arrastra el puerto de la conexión entrante y desde
+          # la laptop (8180) salía un issuer distinto al que validan los servicios.
           env {
             name  = "KC_HOSTNAME"
-            value = "keycloak.platform.svc"
-          }
-          env {
-            name  = "KC_HOSTNAME_PORT"
-            value = "8080"
+            value = "http://keycloak.platform.svc:8080"
           }
           env {
             name  = "KC_HTTP_ENABLED"
@@ -62,10 +64,6 @@ resource "kubernetes_deployment" "keycloak" {
           }
           env {
             name  = "KC_HOSTNAME_STRICT"
-            value = "false"
-          }
-          env {
-            name  = "KC_HOSTNAME_STRICT_HTTPS"
             value = "false"
           }
           env {
