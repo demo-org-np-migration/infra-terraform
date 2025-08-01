@@ -193,6 +193,8 @@
       "username": "ana.cliente",
       "enabled": true,
       "emailVerified": true,
+      "firstName": "Ana",
+      "lastName": "Cliente",
       "email": "ana.cliente@cauri.io",
       "credentials": [
         {
@@ -210,6 +212,8 @@
       "username": "bruno.comercio",
       "enabled": true,
       "emailVerified": true,
+      "firstName": "Bruno",
+      "lastName": "Comercio",
       "email": "bruno.comercio@cauri.io",
       "credentials": [
         {
@@ -232,6 +236,8 @@
       "username": "carla.ops",
       "enabled": true,
       "emailVerified": true,
+      "firstName": "Carla",
+      "lastName": "Ops",
       "email": "carla.ops@cauri.io",
       "credentials": [
         {
@@ -308,5 +314,18 @@
         "service"
       ]
     }
-  ]
+  ],
+  "components": {
+    "org.keycloak.userprofile.UserProfileProvider": [
+      {
+        "providerId": "declarative-user-profile",
+        "subComponents": {},
+        "config": {
+          "kc.user.profile.config": [
+            "{\"attributes\": [{\"name\": \"username\", \"displayName\": \"${username}\", \"permissions\": {\"view\": [\"admin\", \"user\"], \"edit\": [\"admin\", \"user\"]}, \"multivalued\": false}, {\"name\": \"email\", \"displayName\": \"${email}\", \"validations\": {\"email\": {}}, \"required\": {\"roles\": [\"user\"]}, \"permissions\": {\"view\": [\"admin\", \"user\"], \"edit\": [\"admin\", \"user\"]}, \"multivalued\": false}, {\"name\": \"firstName\", \"displayName\": \"${firstName}\", \"required\": {\"roles\": [\"user\"]}, \"permissions\": {\"view\": [\"admin\", \"user\"], \"edit\": [\"admin\", \"user\"]}, \"multivalued\": false}, {\"name\": \"lastName\", \"displayName\": \"${lastName}\", \"required\": {\"roles\": [\"user\"]}, \"permissions\": {\"view\": [\"admin\", \"user\"], \"edit\": [\"admin\", \"user\"]}, \"multivalued\": false}], \"groups\": [{\"name\": \"user-metadata\", \"displayHeader\": \"User metadata\", \"displayDescription\": \"Attributes, which refer to user metadata\"}], \"unmanagedAttributePolicy\": \"ENABLED\"}"
+          ]
+        }
+      }
+    ]
+  }
 }
