@@ -93,7 +93,10 @@ contra algo que no sea la laptop, se pisan con `-backend-config` en el init.
   `KC_HOSTNAME_PORT` y `KC_HOSTNAME_STRICT_HTTPS` ni existen (son de v1) y si
   le dejás solo el host, el issuer arrastra el puerto por el que entró el
   request (te queda `:8180` pidiendo desde la laptop, y los servicios
-  rechazan esos tokens porque no matchea `KEYCLOAK_ISSUER`).
+  rechazan esos tokens porque no matchea `KEYCLOAK_ISSUER`). Además sigue en
+  H2 (persistido en un PVC en `/opt/keycloak/data/h2` para que un restart del
+  pod no le pierda las claves RSA del realm) en vez de Postgres -- en serio
+  iría contra una base real como el resto de los servicios.
 - **Kafka single node** (KRaft, un solo broker). Si se cae, se cae para
   staging y para prod a la vez porque comparten broker. Lo sabemos, no es
   el momento de meter 3 nodos para un cluster de laptop.
