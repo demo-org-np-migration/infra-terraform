@@ -71,6 +71,33 @@ resource "kubernetes_deployment" "kafka" {
             name  = "CLUSTER_ID"
             value = "cauri-kafka-kraft-1"
           }
+
+          # Con un solo broker, los defaults de Kafka (replication factor 3
+          # para los topics internos) impiden crear __consumer_offsets y
+          # __transaction_state -- los consumer groups se quedan colgados
+          # esperando un coordinador que nunca aparece porque el topic de
+          # offsets no existe. payments-worker y reporting-etl nunca
+          # consumían por esto.
+          env {
+            name  = "KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR"
+            value = "1"
+          }
+          env {
+            name  = "KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR"
+            value = "1"
+          }
+          env {
+            name  = "KAFKA_TRANSACTION_STATE_LOG_MIN_ISR"
+            value = "1"
+          }
+          env {
+            name  = "KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS"
+            value = "0"
+          }
+          env {
+            name  = "KAFKA_LOG_DIRS"
+            value = "/tmp/kraft-combined-logs"
+          }
         }
       }
     }
