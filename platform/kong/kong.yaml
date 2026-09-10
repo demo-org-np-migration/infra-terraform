@@ -83,6 +83,7 @@ services:
       - name: merchant-portal-bff-staging-route
         hosts:
           - api.staging.cauri.local
+          - comercios.staging.cauri.local
         paths:
           - "/merchant"
         strip_path: false
@@ -92,6 +93,7 @@ services:
       - name: backoffice-api-staging-route
         hosts:
           - api.staging.cauri.local
+          - ops.staging.cauri.local
         paths:
           - "/backoffice"
         strip_path: false
@@ -100,16 +102,16 @@ services:
     routes:
       - name: backoffice-ui-staging-route
         hosts:
-          - api.staging.cauri.local
+          - ops.staging.cauri.local
         paths:
-          - "/ops"
+          - "/"
         strip_path: false
   - name: web-app-staging
     url: http://web-app.staging.svc.cluster.local:8080
     routes:
       - name: web-app-staging-route
         hosts:
-          - api.staging.cauri.local
+          - comercios.staging.cauri.local
         paths:
           - "/"
         strip_path: false
@@ -196,6 +198,7 @@ services:
       - name: merchant-portal-bff-prod-route
         hosts:
           - api.cauri.local
+          - comercios.cauri.local
         paths:
           - "/merchant"
         strip_path: false
@@ -205,6 +208,7 @@ services:
       - name: backoffice-api-prod-route
         hosts:
           - api.cauri.local
+          - ops.cauri.local
         paths:
           - "/backoffice"
         strip_path: false
@@ -213,16 +217,16 @@ services:
     routes:
       - name: backoffice-ui-prod-route
         hosts:
-          - api.cauri.local
+          - ops.cauri.local
         paths:
-          - "/ops"
+          - "/"
         strip_path: false
   - name: web-app-prod
     url: http://web-app.prod.svc.cluster.local:8080
     routes:
       - name: web-app-prod-route
         hosts:
-          - api.cauri.local
+          - comercios.cauri.local
         paths:
           - "/"
         strip_path: false
