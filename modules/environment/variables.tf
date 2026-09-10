@@ -40,3 +40,10 @@ variable "s3_bucket_prefix" {
   description = "Prefijo de los buckets S3 de este entorno (cauri-staging- | cauri-prod-)."
   type        = string
 }
+
+variable "ghcr_pull_token" {
+  description = "PAT con read:packages para que los pods pulleen imágenes privadas de ghcr.io. Vacío = no se crea el pull secret (las imágenes locales 'local' no lo necesitan)."
+  type        = string
+  default     = ""
+  sensitive   = true
+}

@@ -1,5 +1,6 @@
 module "environment" {
-  source = "../../modules/environment"
+  ghcr_pull_token = var.ghcr_pull_token
+  source          = "../../modules/environment"
 
   env             = "staging"
   keycloak_issuer = "http://keycloak.platform.svc:8080/realms/cauri-staging"
