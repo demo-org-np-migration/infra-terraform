@@ -24,26 +24,34 @@ envs/prod/             instancia el módulo con env = prod
 
 ## Cómo aplicar
 
-Orden importa. `platform` tiene que existir antes que los entornos porque
-Keycloak, Kafka y Kong viven ahí.
+Orden importa, y no es el intuitivo: primero los entornos (`envs/staging`, `envs/prod`)
+y después `platform`. Los RoleBindings del runner de Actions que crea `platform` apuntan
+a los namespaces `staging` y `prod`, y Terraform los rechaza si todavía no existen. Los
+entornos no necesitan nada de `platform` para aplicarse (LocalStack lo levanta el bootstrap
+del cluster). Keycloak, Kafka y Kong viven en `platform` y las apps recién los necesitan
+cuando se deployan.
 
 ```bash
-# 1. platform (una sola vez, o cuando cambia algo compartido)
-cd platform
+# 1. staging
+cd envs/staging
+terraform init
+terraform plan -out=tfplan
+terraform apply tfplan
+
+# 2. prod
+cd ../prod
+terraform init
+terraform plan -out=tfplan
+terraform apply tfplan
+
+# 3. platform (una sola vez, o cuando cambia algo compartido)
+cd ../../platform
 terraform init
 terraform plan \
   -var="github_runner_pat=$GITHUB_RUNNER_PAT" \
   -out=tfplan
 terraform apply tfplan
 
-# 2. staging
-cd ../envs/staging
-terraform init
-terraform plan -out=tfplan
-terraform apply tfplan
-
-# 3. prod (recién después de validar staging)
-cd ../prod
 terraform init
 terraform plan -out=tfplan
 terraform apply tfplan
