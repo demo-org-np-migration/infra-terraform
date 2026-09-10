@@ -173,10 +173,8 @@ resource "kubernetes_deployment" "gh_runner" {
             name  = "RUNNER_WORKDIR"
             value = "/tmp/runner"
           }
-          env {
-            name  = "EPHEMERAL"
-            value = "false"
-          }
+          # Sin EPHEMERAL: la imagen activa el modo efímero con cualquier valor (hasta "false"),
+          # y el runner se desregistra después de cada job.
         }
       }
     }
