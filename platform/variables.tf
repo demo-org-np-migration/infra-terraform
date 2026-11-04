@@ -26,11 +26,11 @@ variable "github_runner_pat" {
 variable "vendor_mock_tag" {
   description = "Tag de la imagen ghcr.io/demo-org-np-migration/vendor-mock a desplegar."
   type        = string
-  default     = "sha-c4ab3a4"
+  default     = "sha-d9f16a7"
 }
 
 variable "gh_runner_tag" {
   description = "Tag de la imagen ghcr.io/demo-org-np-migration/gh-runner a desplegar."
   type        = string
-  default     = "sha-c4ab3a4"
+  default     = "sha-d9f16a7"
 }
